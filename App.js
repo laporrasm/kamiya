@@ -35,5 +35,24 @@ function registrarUsuarios()
 
         console.log(errorCode)
         console.log(errorMessage)
+        addErrorMessage(errorMessage)
       });
+}
+
+let addErrorMessage = (message) => {
+  message = message.toLowerCase();
+  if (message.includes("email")) {
+    let emailContainer = document.getElementById("user-group");
+    let emailInput = document.getElementById("email");
+
+    emailContainer.querySelector(".invalid-feedback").textContent = message;
+    emailInput.classList.add("is-invalid");
+  }
+  else if (message.includes("password")) {
+    let emailContainer = document.getElementById("contrasena-group");
+    let emailInput = document.getElementById("password");
+
+    emailContainer.querySelector(".invalid-feedback").textContent = message;
+    emailInput.classList.add("is-invalid");
+  }
 }
