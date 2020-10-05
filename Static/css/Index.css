@@ -1,5 +1,5 @@
 body{
-    background: url(../img/ClinicaHD.jpg) no-repeat center center fixed;
+    background: url(../img/fondo.jpg) no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -69,4 +69,13 @@ button{
 
 .forgot a{
     color: white;
+}
+
+#btn-group{
+    height: 25px;
+}
+
+#Registrar{
+    background-color: #0fbb54;
+    border-color: #0fbb54;
 }
