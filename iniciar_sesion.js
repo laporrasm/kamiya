@@ -37,6 +37,7 @@ function observador(){
     if (user) {
       // User is signed in.
       console.log("Existe usuario activo")
+      document.location.href="pagina1.html";
       var displayName = user.displayName;
       var email = user.email;
       var emailVerified = user.emailVerified;
