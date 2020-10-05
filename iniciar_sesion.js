@@ -73,7 +73,7 @@ function observador(){
 
 let addErrorMessage = (message) => {
   message = message.toLowerCase();
-  if (message.includes("email2")) {
+  if (message.includes("email")) {
     let emailContainer = document.getElementById("user-group");
     let emailInput = document.getElementById("email2");
 
@@ -81,7 +81,7 @@ let addErrorMessage = (message) => {
     emailInput.classList.add("is-invalid");
     console.log("error1");
   }
-  else if (message.includes("password2")) {
+  else if (message.includes("password")) {
     let emailContainer = document.getElementById("contrasena-group");
     let emailInput = document.getElementById("password2");
 
