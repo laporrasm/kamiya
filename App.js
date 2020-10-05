@@ -27,7 +27,9 @@ function registrarUsuarios()
 
 
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(function() {
+      document.location.href="Iniciar_Sesion.html";
+    }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;

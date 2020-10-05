@@ -12,11 +12,17 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.auth();
   
-let loginButton = document.querySelector(".login-btn")
+let loginButton = document.getElementById("Iniciar");
+let redirigirButton = document.getElementById("Registrar");
 
 loginButton.addEventListener("click", e => {
   e.preventDefault()
   InicioSesionUsuarios()
+})
+
+redirigirButton.addEventListener("click", f => {
+  f.preventDefault()
+  redirigirUsuario()
 })
 
 
@@ -29,8 +35,18 @@ function InicioSesionUsuarios(){
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
+      addErrorMessage(errorMessage);
     });
 }
+
+function redirigirUsuario(){
+  
+  document.location.href="Login.html";
+}
+
+
+
+
 
 function observador(){
   firebase.auth().onAuthStateChanged(function(user) {
@@ -54,4 +70,26 @@ function observador(){
   });
 
 }
+
+let addErrorMessage = (message) => {
+  message = message.toLowerCase();
+  if (message.includes("email2")) {
+    let emailContainer = document.getElementById("user-group");
+    let emailInput = document.getElementById("email2");
+
+    emailContainer.querySelector(".invalid-feedback").textContent = message;
+    emailInput.classList.add("is-invalid");
+    console.log("error1");
+  }
+  else if (message.includes("password2")) {
+    let emailContainer = document.getElementById("contrasena-group");
+    let emailInput = document.getElementById("password2");
+
+    emailContainer.querySelector(".invalid-feedback").textContent = message;
+    emailInput.classList.add("is-invalid");
+    console.log("error2");
+  }
+  
+}
+
 observador();
