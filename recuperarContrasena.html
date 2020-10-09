@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recuperar Contraseña</title>
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconosde Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="Static/css/IndexContra.css" th:href="@{/css/IndexContra.css}">
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+
+
+
+</head>
+<body>
+    
+    <div class="modal-dialog text-center" > 
+        <h1  class="modal-dialog text-cente" style="margin-right: -20px;">Olvidaste de tu Contrasena?</h1>
+        <div class="col-sm-8 main-section" >
+            <div class="modal-content">
+                <div class="col-12 user-img">
+                    <img src="Static/img/AvatarPaciente.png" th:src="@{/img/AvatarPaciente.png}"/>  
+                </div>
+                <form class="col-12"  method="get">
+                    
+                    <div class="form-group">
+                        <p style="text-align: justify;">
+                            Porfavor ingrese su correo electronico para que pueda recibir informacion para recuperar su cuenta
+                        </p>
+                        <input id="email" type="email" class="form-control" placeholder="Ingrese su correo" name="Correo"/>
+                    </div>
+                    <div class="form-group" id="btn-group" >
+                        <button id="btn-resetPassword" onclick="resetearPassword()" type="button"  class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Recuperar Contrasena</button>
+                    </div>
+                </form>
+              
+                <script src="AppContra.js"></script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

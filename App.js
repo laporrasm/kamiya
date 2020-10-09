@@ -58,3 +58,4 @@ let addErrorMessage = (message) => {
     emailInput.classList.add("is-invalid");
   }
 }
+
