@@ -12,9 +12,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.auth();
 
-let user = firebase.auth().currentUser;
-console.log(user);
-
 const signOutBtn = document.querySelector('.sign-out-btn');
 
 signOutBtn.addEventListener("click", () => {
