@@ -35,6 +35,8 @@ function InicioSesionUsuarios(){
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
+      console.log(errorCode)
+      console.log(errorMessage)
       addErrorMessage(errorMessage);
     });
 }
@@ -81,7 +83,7 @@ let addErrorMessage = (message) => {
     emailInput.classList.add("is-invalid");
     console.log("error1");
   }
-  else if (message.includes("password")) {
+  else {
     let emailContainer = document.getElementById("contrasena-group");
     let emailInput = document.getElementById("password2");
 
