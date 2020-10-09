@@ -33,6 +33,10 @@ function resetearPassword()
 
             console.log(errorCode)
             console.log(errorMessage)
+            window.alert("Hubo un error , no se encontro el correo");
+
+
+            
 
         });
     }
