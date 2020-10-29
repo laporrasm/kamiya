@@ -4,17 +4,64 @@
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="Static/css/LandinPage.css" th:href="@{/css/LandinPage.css}">
 </head>
 <body>
-    <h1> Landing Page</h1>
-    <button class="sign-out-btn">Cerrar Sesi&oacute;n</button>
-    <script src="./logOut.js"></script>
-    <style>
-        body {
-            min-height: 100vh;
-            display: grid;
-            place-content: center;
-        }
-    </style>
+    <header class="header">
+        <div class="container logo-nav-container">
+        <a href="#" class="logo" style="color: rgb(34, 199, 163);"><strong>K-miya</strong></a>
+        <nav class="navigation">
+            <ul>
+            <li><a href="#"><strong>Inicio</strong></a></li>
+            <li><a href="#"><strong>Clinicas</strong></a></li>
+            <li><a href="#"><strong>Usuarios</strong></a></li>
+            <li><a href="#"><strong>Cerrar Sesion</strong></a></li>
+            </ul>
+        </nav>
+        </div>
+    </header>
+    <main class="main">
+        <div style="padding-top:1em; padding-bottom:0">
+            <img src="Static/img/Slider.jpg" style="width:100%">
+        </div>
+        <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 1em 0; margin-top: -1em;">
+            <h1>¡Bienvenido Administrador!</h1>
+        </div>
+        <div class="container">
+                <p><strong>Como administrador puedes modificar los datos de las distintas clinicas y usuarios, esto incluye modificar datos, localización, medicos, creación y eliminacion de usuarios.</strong></p>
+                <p><strong>Te recomendamos verificar los cambios que usaras ya que estos podrián perjudicar el funcionamiento de la pagina.</strong></p>
+                <img src="Static/img/pngwing.com (3).png" style="padding-left:30%; padding-bottom:2em; height: 300px">
+        </div>        
+        <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 1em 0; margin-top: -1em;">
+            <h1>Noticias</h1>
+        </div>
+        <div class="container">
+                <div>
+                    <p >
+                        <img src="Static/img/noticia.jpg" align="left" style="width:30%; padding-right: 1em"> 
+                        <h3 style="color:black; margin-bottom:0">EsSalud toma medidas para fortalecer su capacidad de respuesta ante demanda de oxígeno por COVID-19</h3>
+                        <div style="color:rgb(15, 116, 94); padding-bottom: 1em;"><strong>Publicado el 28/10/2020</strong></div> 
+                        El Seguro Social instala en sus centros hospitalarios y hospitales temporales redes de distribución de oxígeno para atender a pacientes con insuficiencia respiratoria....
+                    </p>
+                </div>
+                <br>
+                <div>
+                    <p >
+                        <img src="Static/img/noticia2.jpg" align="left" style="width:30%; padding-right: 1em"> 
+                        <h3 style="color:black; margin-bottom:0">En EsSalud La Libertad se instaló subcomité de Seguridad y Salud en el Trabajo</h3>
+                        <div style="color:rgb(15, 116, 94); padding-bottom: 1em;"><strong>Publicado el 28/10/2020</strong></div> 
+                        El subcomité fue elegido a través de elecciones virtuales, con la participación de todos los trabajadores, de acuerdo a la ley 29783 Ley de Seguridad y Salud en el Trabajo...
+                    </p>
+                </div>
+                <br>
+                <button class="sign-out-btn">Cerrar Sesi&oacute;n</button>
+                <script src="./logOut.js"></script>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <h1 style="color: black;">¡El mejor aliado para tu salud!</h1>
+        </div>
+    </footer>
 </body>
 </html>
