@@ -83,3 +83,7 @@ p{
 .main{
     padding-top: 3.0rem;
 }
+
+.bg-primary {
+    background-color: rgb(34, 199, 163)!important;
+}

@@ -12,7 +12,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.auth();
 
-const signOutBtn = document.querySelector('.sign-out-btn');
+const signOutBtn = document.querySelector('#cerrar');
 
 signOutBtn.addEventListener("click", () => {
   firebase.auth().signOut().then(() => document.location.href= "iniciar_Sesion.html");
