@@ -42,10 +42,11 @@
                                         <label>DIRECCIÓN</label>
                                         <input id="direccion" type="text" class="form-control" required>
                                       </div>
-                                      <div class="form-group">
+                                      <div class="form-group especialidades">
                                         <label>ESPECIALIDADES</label>
-                                        <input id="especialidades" type="number" class="form-control" required>
-                                      </div>                                    
+                                        <input id="especialidades" class="form-control" required>
+                                      </div>
+                                      <button type="button" class="add-especialidad">Añadir especialidad</button>
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal" tabindex="2">Cancelar</button>
@@ -120,7 +121,10 @@
     let id = $('#id').val();
     let nombre = $('#nombre').val();
     let direccion = $('#direccion').val();
-    let especialidades = $('#especialidades').val();
+    let especialidades = [];
+    document.querySelector('.especialidades').querySelectorAll('input').forEach(input => {
+      if (input.value) especialidades.push(input.value);
+    });
     let idFirebase = id;
     if(idFirebase == ''){
      idFirebase = coleccionClinicas.push().key;
@@ -144,16 +148,25 @@
     return `
     <td>${nombre}</td>
     <td>${direccion}</td>
-    <td>${especialidades}</td>
+    <td>
+      ${especialidades.reduce((acc, current) => acc + ', ' + current)}
+    </td>
     <td><button class="btnEditar btn btn-secondary" data-toggle="tooltip" title="Editar">${iconoEditar}</button><button class="btnBorrar btn btn-danger" data-toggle="tooltip" title="Borrar">${iconoBorrar}</button></td>
     `
   };
+
+  $(".add-especialidad").click(() => $('.especialidades').append('<input class="form-control">'));
+
   //Programacion botones
   $('#btnNuevo').click(function(){
     $('#id').val('');
     $('#nombre').val('');
     $('#direccion').val('');
-    $('#especialidades').val('');
+
+    document.querySelector(".especialidades")
+    .querySelectorAll('input')
+    .forEach((element, index) => { if (index != 0) element.remove() })
+
     $('form').trigger('reset');
     $('#modalAltaEdicion').modal('show');
   });
@@ -162,11 +175,21 @@
     let id = $(this).closest('tr').attr('id');
     let nombre = $(this).closest('tr').find('td:eq(0)').text();
     let direccion = $(this).closest('tr').find('td:eq(1)').text();
-    let especialidades = $(this).closest('tr').find('td:eq(2)').text();
+    let especialidades = $(this).closest('tr').find('td:eq(2)').text().trim().split(',');
     $('#id').val(id);
     $('#nombre').val(nombre);
-    $('#direccion').val(direccion);                
-    $('#especialidades').val(especialidades);                
+    $('#direccion').val(direccion);
+
+    document.querySelector(".especialidades")
+    .querySelectorAll('input')
+    .forEach(element => element.remove())
+
+    especialidades.forEach(especialidad => {
+      let input = document.createElement('input');
+      input.classList.add('form-control');
+      input.value = especialidad;
+      $('.especialidades').append(input)
+    })         
     $('#modalAltaEdicion').modal('show');
   });
 
@@ -188,7 +211,7 @@
         })        
   });
 
-//CHILD_ADDED
+// CHILD_ADDED
 coleccionClinicas.on('child_added', data =>{
     let tr = document.createElement('tr')
     tr.id = data.key
