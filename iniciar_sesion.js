@@ -46,29 +46,57 @@ function redirigirUsuario(){
   document.location.href="Login.html";
 }
 
-
-
-
-
 function observador(){
+  
+  
+
   firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      console.log("Existe usuario activo")
-      document.location.href="pagina1.html";
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
-      // ...
-    } else {
-      console.log("no hay usuario activo")
-      // User is signed out.
-      // ...
+    var admin = document.getElementById('email2').value;
+    if(admin == "20161489@aloe.ulima.edu.pe")
+    {
+      if (user) {
+        // User is signed in.
+        console.log("Existe usuario activo")
+        
+        document.location.href="crud.html";
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+      } else {
+        console.log("no hay usuario activo")
+        
+        // User is signed out.
+        // ...
+      }
+
+    }else{
+      if (user) {
+        // User is signed in.
+        console.log("Existe usuario activo")
+        
+        document.location.href="pagina1.html";
+        console.log(admin)
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+      } else {
+        console.log("no hay usuario activo")
+        
+        // User is signed out.
+        // ...
+      }
     }
+    
   });
 
 }
