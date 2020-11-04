@@ -30,7 +30,7 @@ function InicioSesionUsuarios(){
     var email2 =  document.getElementById('email2').value;
     var password2 = document.getElementById('password2').value;
 
-    firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email2, password2).then(obj => localStorage.setItem('userEmail', obj.user.email)).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -51,7 +51,8 @@ function observador(){
   
 
   firebase.auth().onAuthStateChanged(function(user) {
-    var admin = document.getElementById('email2').value;
+    // var admin = document.getElementById('email2').value;
+    const admin = localStorage.getItem('userEmail');
     if(admin == "20161489@aloe.ulima.edu.pe")
     {
       if (user) {

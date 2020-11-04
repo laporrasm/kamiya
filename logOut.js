@@ -16,4 +16,5 @@ const signOutBtn = document.querySelector('#cerrar');
 
 signOutBtn.addEventListener("click", () => {
   firebase.auth().signOut().then(() => document.location.href= "iniciar_Sesion.html");
+  localStorage.removeItem('userEmail');
 });
