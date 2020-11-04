@@ -128,11 +128,19 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
+  firebase.auth();
+  
   const db = firebase.database();
   coleccionClinicas = db.ref().child('clinicas');
   bodyClinicas = $('#bodyClinicas').val();
   //console.log(bodyClinicas);
   
+  const signOutBtn = document.querySelector('#cerrar');
+
+  signOutBtn.addEventListener("click", () => {
+  firebase.auth().signOut().then(() => document.location.href= "iniciar_Sesion.html");
+  });
+
    
   $('form').submit(function(e){
     e.preventDefault();
