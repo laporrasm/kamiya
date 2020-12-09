@@ -12,19 +12,67 @@
         <a href="#" class="logo" style="color: rgb(34, 199, 163);"><strong>K-miya</strong></a>
         <nav class="navigation">
             <ul>
-            <li><a href="#"><strong></strong></a></li>
-            <li><a href="#"><strong></strong></a></li>
-            <li><a href="#"><strong></strong></a></li>
+            <li><a href="pagina1.html"><strong>Inicio</strong></a></li>
             <li><a href="#" id="cerrar"><strong>Cerrar Sesion</strong></a></li>
             </ul>
         </nav>
         </div>
     </header>
     <main class="main">
-        <div style="padding-top:17.5%; padding-bottom:0; text-align:center">
-            <h1>Proximamente en el Sprint 3</h1>
+        <div style="padding-top:1em; padding-bottom:0">
+            <img src="Static/img/Slider.jpg" style="width:100%">
         </div>
+        <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 1em 0; margin-top: -1em;">
+            <h1>¡Bienvenido!</h1>
+        </div>
+        <div class="container">
+                <p><strong>En está pagina podrás realizar las consultas sobre las distintas clinicas que desees obtener información </strong></p>
+                <img src="Static/img/pngwing.com (3).png" style="padding-left:30%; padding-bottom:2em; height: 300px">
+        </div>        
+        <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 1em 0; margin-top: -1em;">
+            <h1>Realise su reserva aquí</h1>
+        </div>
+        <div class="formulario" Style="margin-top:2em; background-color: rgb(34, 199, 163); text-align:center" >
+                <p style="color: white; padding-top:0px; margin-bottom: 0px; font-size:20px"><strong>Seleccion la clinica</strong></p>
+                <select id='lista_clinicas'></select>
+                <button>Ok</button>
+                <br>
+                <p style="color: white; padding-top:10px; margin-bottom: 0px; font-size:20px"><strong>Selecciona una especialidad</strong></p>
+                <select id='lista_clinicas'></select>
+                <button>Ok</button>
+                <br>
+                <p style="color: white; padding-top:10px; margin-bottom: 0px; font-size:20px"><strong>Selecciona un medico</strong></p>
+                <select id='lista_clinicas'></select>
+                <button>Ok</button>
+                <br>    
+                <br>
+                <button type="button" style="margin-bottom:15px">Realizar Reserva</button>
+        </div>
+        <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 2em 0; margin-top: 3em;">
+            <h1>Noticias</h1>
+        </div>
+                <div class="container" style="padding-top:2em ">
+                    <div>
+                        <p >
+                            <img src="Static/img/noticia.jpg" align="left" style="width:30%; padding-right: 1em"> 
+                            <h3 style="color:black; margin-bottom:0">EsSalud toma medidas para fortalecer su capacidad de respuesta ante demanda de oxígeno por COVID-19</h3>
+                            <div style="color:rgb(15, 116, 94); padding-bottom: 1em;"><strong>Publicado el 28/10/2020</strong></div> 
+                            El Seguro Social instala en sus centros hospitalarios y hospitales temporales redes de distribución de oxígeno para atender a pacientes con insuficiencia respiratoria....
+                        </p>
+                    </div>
+                    <br>
+                    <div>
+                        <p >
+                            <img src="Static/img/noticia2.jpg" align="left" style="width:30%; padding-right: 1em"> 
+                            <h3 style="color:black; margin-bottom:0">En EsSalud La Libertad se instaló subcomité de Seguridad y Salud en el Trabajo</h3>
+                            <div style="color:rgb(15, 116, 94); padding-bottom: 1em;"><strong>Publicado el 28/10/2020</strong></div> 
+                            El subcomité fue elegido a través de elecciones virtuales, con la participación de todos los trabajadores, de acuerdo a la ley 29783 Ley de Seguridad y Salud en el Trabajo...
+                        </p>
+                    </div>
+                </div>
+                <br>
                 <script src="./logOut.js"></script>
+        </div>
     </main>
     <footer class="footer" style="background-color: rgb(34, 199, 163);">
         <div class="container">
@@ -32,4 +80,32 @@
         </div>
     </footer>
 </body>
+<script>
+    var contador = 0;
+  function addItemsToList(nombre){
+      var list = document.getElementById('lista_clinicas');
+      var header = document.createElement('h2');
+
+      var _nombre = document.createElement('option');
+
+      header.innerHTML='contador-'+(++contador);
+      _nombre.innerHTML=nombre;
+
+      list.appendChild(header); //not a list item but still can be added
+      list.appendChild(_nombre);
+    
+  }
+
+  function FetchAllData(){
+      firebase.database().ref('clinicas').once('value',function(snapshot){
+        snapshot.forEach(
+            function(ChildSnapshot){
+                let nombre = ChildSnapshot.val().nombre;
+                addItemsToList(nombre)
+            }
+        )
+      });
+  }
+  window.onload = FetchAllData();
+</script>
 </html>

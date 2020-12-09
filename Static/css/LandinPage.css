@@ -18,6 +18,14 @@ h1{
     margin: 0 auto;
 }
 
+.formulario{
+    width: 30%;
+    max-width: 850px;
+    margin: 0 auto;
+    border: solid 6px;
+    border-color: rgb(21, 141, 115);
+}
+
 p{
     margin-bottom: 1.6em;
     color: rgb(58, 57, 57);
