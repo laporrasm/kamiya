@@ -34,15 +34,21 @@
         </div>
         <div class="formulario" Style="margin-top:2em; background-color: rgb(34, 199, 163); text-align:center" >
                 <p style="color: white; padding-top:0px; margin-bottom: 0px; font-size:20px"><strong>Seleccion la clinica</strong></p>
-                <select id='lista_clinicas'></select>
+                <select id='lista_clinicas'>
+                    <option value="" selected hidden>Seleccione una cl&iacute;nica</option>
+                </select>
                 <button>Ok</button>
                 <br>
                 <p style="color: white; padding-top:10px; margin-bottom: 0px; font-size:20px"><strong>Selecciona una especialidad</strong></p>
-                <select id='lista_clinicas'></select>
+                <select id="dropdown-especialidades">
+                    <option value="" selected hidden>Seleccione una especialidad</option>
+                </select>
                 <button>Ok</button>
                 <br>
                 <p style="color: white; padding-top:10px; margin-bottom: 0px; font-size:20px"><strong>Selecciona un medico</strong></p>
-                <select id='lista_clinicas'></select>
+                <select id="dropdown-doctores">
+                    <option value="" selected hidden>Seleccione un m&eacute;dico</option>
+                </select>
                 <button>Ok</button>
                 <br>    
                 <br>
@@ -82,30 +88,88 @@
 </body>
 <script>
     var contador = 0;
-  function addItemsToList(nombre){
-      var list = document.getElementById('lista_clinicas');
-      var header = document.createElement('h2');
 
-      var _nombre = document.createElement('option');
+    var clinicas = [];
 
-      header.innerHTML='contador-'+(++contador);
-      _nombre.innerHTML=nombre;
+    const clinicasDropdown = document.getElementById("lista_clinicas");
+    const especialidadesDropdown = document.getElementById("dropdown-especialidades");
+    const doctoresDropdown = document.getElementById("dropdown-doctores");
 
-      list.appendChild(header); //not a list item but still can be added
-      list.appendChild(_nombre);
-    
-  }
+    const resetSelect = select => {
+        let defaultOption = document.createElement("option");
+        defaultOption.innerText = "Seleccione una opción";
+        defaultOption.selected = true;
+        defaultOption.hidden = true;
+        select.innerHTML = "";
+        select.appendChild(defaultOption);
+    }
 
-  function FetchAllData(){
-      firebase.database().ref('clinicas').once('value',function(snapshot){
-        snapshot.forEach(
-            function(ChildSnapshot){
+    const mostrarEspecialidades = id => {
+        let especialidades = clinicas.find(clinica => clinica.id == id).especialidades || [];
+        especialidades.forEach(especialidad => {
+            let option = document.createElement("option");
+            option.innerText = especialidad;
+            especialidadesDropdown.appendChild(option);
+        })
+    };
+
+    clinicasDropdown.addEventListener("change", (event) => {
+        resetSelect(especialidadesDropdown);
+        resetSelect(doctoresDropdown);
+        mostrarEspecialidades(event.target.value);
+    });
+
+    especialidadesDropdown.addEventListener("change", event => {
+        resetSelect(doctoresDropdown);
+        let select = event.target;
+        fetchDoctorsData(select.options[select.selectedIndex].text, clinicasDropdown.value);
+    })
+
+    function addItemsToList(name, id) {
+        var list = document.getElementById('lista_clinicas');
+        var header = document.createElement('h2');
+
+        let option = document.createElement('option');
+
+        header.innerHTML='contador-'+(++contador);
+        option.innerHTML = name;
+        option.value = id;
+
+        list.appendChild(header); //not a list item but still can be added
+        list.appendChild(option);
+    }
+
+    const addDoctorToDropdown = (doctorId, doctorName) => {
+        let option = document.createElement("option");
+        option.innerText = doctorName;
+        option.value = doctorId;
+
+        doctoresDropdown.appendChild(option);
+    }
+
+    function fetchClinicData() {
+        firebase.database().ref('clinicas').once('value', function(snapshot) {
+            snapshot.forEach(ChildSnapshot => {
+                clinicas.push({
+                    id: ChildSnapshot.key,
+                    nombre: ChildSnapshot.val().nombre,
+                    especialidades: ChildSnapshot.val().especialidades,
+                });
                 let nombre = ChildSnapshot.val().nombre;
-                addItemsToList(nombre)
-            }
-        )
-      });
-  }
-  window.onload = FetchAllData();
+                addItemsToList(nombre, ChildSnapshot.key);
+            });
+        });
+    }
+
+    function fetchDoctorsData(especialidad, clinicaId) {
+        firebase.database().ref("doctores").once("value", snapshot => {
+            snapshot.forEach(doctorSnapshot => {
+                let doctorObject = doctorSnapshot.val();
+                if (doctorObject.clinica.id == clinicaId && doctorObject.especialidad == especialidad) addDoctorToDropdown(doctorSnapshot.key, `${doctorObject.nombre} ${doctorObject.apellido}`)
+            })
+        })
+    }
+
+    window.onload = fetchClinicData();
 </script>
 </html>
