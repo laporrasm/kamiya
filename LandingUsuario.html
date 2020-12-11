@@ -200,7 +200,9 @@
                 var database = firebase.database(); //
                 var ref = database.ref("citas_registradas");
                 //Colocar objeto en la referencia
-                ref.push(data);
+                var referencia = ref.push(data);
+                var id_firebase = referencia.key;
+                console.log(id_firebase);
                 document.location.href="Felicitaciones.html";
                 }
                 
@@ -208,6 +210,9 @@
         }
     
     });
+
+
+    
 
 </script>
 </html>
