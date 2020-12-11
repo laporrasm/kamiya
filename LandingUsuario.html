@@ -30,7 +30,7 @@
                 <img src="Static/img/pngwing.com (3).png" style="padding-left:30%; padding-bottom:2em; height: 300px">
         </div>        
         <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 1em 0; margin-top: -1em;">
-            <h1>Realise su reserva aquí</h1>
+            <h1>Realice su reserva aquí</h1>
         </div>
         <div class="formulario" Style="margin-top:2em; background-color: rgb(34, 199, 163); text-align:center" >
                 <p style="color: white; padding-top:0px; margin-bottom: 0px; font-size:20px"><strong>Seleccion la clinica</strong></p>
@@ -49,7 +49,7 @@
                 </select>   
                 <br>    
                 <br>
-                <button type="button" style="margin-bottom:15px">Realizar Reserva</button>
+                <button type="button" id = "reservar" style="margin-bottom:15px">Realizar Reserva</button>
         </div>
         <div style="background-color: rgb(34, 199, 163); text-align: center; color: white; padding: 2em 0; margin-top: 3em;">
             <h1>Noticias</h1>
@@ -88,7 +88,7 @@
 
     var clinicas = [];
 
-    const clinicasDropdown = document.getElementById("lista_clinicas");
+    const clinicasDropdown = document.getElementById("lista_clinicas"); 
     const especialidadesDropdown = document.getElementById("dropdown-especialidades");
     const doctoresDropdown = document.getElementById("dropdown-doctores");
 
@@ -168,5 +168,48 @@
     }
 
     window.onload = fetchClinicData();
+
+    let button = document.getElementById("reservar");
+    button.addEventListener("click",function(){
+        let seleccion_clinica = document.getElementById("lista_clinicas").options[document.getElementById("lista_clinicas").selectedIndex].text
+        let seleccion_especialidad = document.getElementById("dropdown-especialidades").value;
+        let seleccion_medico = document.getElementById("dropdown-doctores").options[document.getElementById("dropdown-doctores").selectedIndex].text
+
+      
+        
+        if (seleccion_clinica == "Seleccione una clínica" ){
+            alert("Porfavor seleccione una clínica")
+            console.log("entro a la clinica");
+        }else{
+            if(seleccion_especialidad == "Seleccione una opción" ){ 
+            alert("Porfavor seleccione una especialidad")
+            console.log("entro a la especialidad");
+            }else{
+                if(seleccion_medico == "Seleccione una opción" ){
+                    alert("Porfavor seleccione un médico")
+                    console.log("entro a los doctores ")  
+                }else{
+                    var data = { //Creacion del objeto
+                    clinica :seleccion_clinica,
+                    especialidad:seleccion_especialidad,
+                    medico:seleccion_medico
+
+                }
+                //Guardarmos en firebase
+
+                var database = firebase.database(); //
+                var ref = database.ref("citas_registradas");
+
+                //Colocar objeto en la referencia
+                ref.push(data);
+
+                }
+                
+            }
+        }
+
+    });
+//hola2
 </script>
 </html>
+
