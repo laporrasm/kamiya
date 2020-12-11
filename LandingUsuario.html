@@ -202,6 +202,9 @@
                 //Colocar objeto en la referencia
                 var referencia = ref.push(data);
                 var id_firebase = referencia.key;
+
+                localStorage.setItem("idCita", id_firebase);
+
                 console.log(id_firebase);
                 document.location.href="Felicitaciones.html";
                 }

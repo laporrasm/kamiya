@@ -21,9 +21,14 @@
     <div style="text-align: center;margin: 12% 10%; background-color: white; widows: 500px;; height: 300px; border: 10px solid; border-color: black;">
        <h1 style="color: rgb(21, 92, 75); font-size:60px; margin-top:30px; margin-bottom: 5px;">  ¡Felicitaciones!</h1>
        <p style="font-size:25px"><strong>Enhorabuena, ya tienes tu cita reservada con el siguiente codigo:</strong></p>
-       <p style="font-size:25px"><strong>Codigo:</strong></p>
+       <p style="font-size:25px"><strong>Codigo: <span class="codigo"></span></strong></p>
     </div>
 </body>
+
+<script>
+    let codeContainer = document.querySelector(".codigo");
+    codeContainer.textContent = localStorage.getItem("idCita");
+</script>
 
 <script src="./logOut.js"></script>
 
