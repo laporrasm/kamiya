@@ -175,7 +175,7 @@
         let seleccion_especialidad = document.getElementById("dropdown-especialidades").value;
         let seleccion_medico = document.getElementById("dropdown-doctores").options[document.getElementById("dropdown-doctores").selectedIndex].text
 
-      
+        
         
         if (seleccion_clinica == "Seleccione una clínica" ){
             alert("Porfavor seleccione una clínica")
@@ -199,17 +199,16 @@
 
                 var database = firebase.database(); //
                 var ref = database.ref("citas_registradas");
-
                 //Colocar objeto en la referencia
                 ref.push(data);
-
+                document.location.href="Felicitaciones.html";
                 }
                 
             }
         }
-
+    
     });
-//hola2
+
 </script>
 </html>
 
